@@ -1,0 +1,6 @@
+{
+  "name": "Hacker Ankit Studio — Pro Showreel & AI Video Lab",
+  "description": "Pro-edited 16-second developer and ethical hacker showreel studio for Hacker Ankit, featuring a real-time beat-synced video renderer and Gemini Omni Flash photo-to-video generator.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
