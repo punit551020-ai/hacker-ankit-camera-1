@@ -31,6 +31,21 @@
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <script>
+      window.__deferredPWAInstallPrompt = null;
+      window.__pwaAppInstalled = false;
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        window.__deferredPWAInstallPrompt = e;
+        window.__pwaAppInstalled = false;
+        window.dispatchEvent(new CustomEvent('pwa-prompt-ready'));
+      });
+      window.addEventListener('appinstalled', function () {
+        window.__deferredPWAInstallPrompt = null;
+        window.__pwaAppInstalled = true;
+        window.dispatchEvent(new CustomEvent('pwa-app-installed'));
+      });
+    </script>
   </head>
   <body class="bg-[#090A0D] text-[#FAFAFA] antialiased selection:bg-[#F59E0B] selection:text-[#090A0D]">
     <div id="root"></div>

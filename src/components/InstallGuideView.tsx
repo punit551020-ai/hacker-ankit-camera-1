@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download, FolderSync, Laptop, ShieldCheck, Smartphone, WifiOff } from 'lucide-react';
+import { Download, ExternalLink, FolderSync, Laptop, ShieldCheck, Smartphone, WifiOff } from 'lucide-react';
 import { usePWAInstall } from '../hooks/usePWAInstall';
 
 interface InstallGuideViewProps {
@@ -14,6 +14,15 @@ export const InstallGuideView: React.FC<InstallGuideViewProps> = ({
   supportsFolderPicker,
 }) => {
   const { isInstallable, isInstalled, install } = usePWAInstall();
+
+  const isInIframe = (() => {
+    if (typeof window === 'undefined') return false;
+    try {
+      return window.self !== window.top;
+    } catch {
+      return true;
+    }
+  })();
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 pb-24 space-y-8">
@@ -48,6 +57,16 @@ export const InstallGuideView: React.FC<InstallGuideViewProps> = ({
                 <Download className="w-4 h-4" />
                 Install to Home Screen Now
               </button>
+            ) : isInIframe ? (
+              <a
+                href={typeof window !== 'undefined' ? window.location.href : './'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#F59E0B] px-5 py-2.5 text-sm font-semibold text-[#090A0D] hover:bg-[#fbbf24] transition min-h-[44px]"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Open Full Tab for 1-Tap Install
+              </a>
             ) : (
               <span className="text-xs text-zinc-400">
                 Use your browser menu below to pin the camera app to your Home Screen or Dock.
